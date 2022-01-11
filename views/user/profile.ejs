@@ -1,0 +1,28 @@
+
+<%- include('../partials/header.ejs')%>
+    <div class="profile">
+        <h3><%=user.firstName%> Connections</h3>
+        <% if(blogs.length){%>
+            <form action = '/connections' method = 'POST'>
+            <table>
+                <tr>
+                  <th>Category</th>
+                  <th>Connection</th>
+                  <th>Actions</th>
+                </tr>
+                    <%for(let j =0; j< blogs.length; j++){ %>
+                        <tr>
+                            <td><b><%= blogs[j].categoryTopic%></b></td>
+                            <td><a href="/connections/<%= blogs[j]._id%>"><%= blogs[j].connectionName%></a></td>
+                            <td> <button type="submit" class="profileButton" formmethod="GET" formaction="/connections/<%= blogs[j]._id%>/edit">Update</button>
+                            <button type="submit" class="profileButton"  formmethod="POST" formaction="/connections/<%= blogs[j]._id%>?_method=DELETE">Delete</button></td>
+                        </tr>   
+                    <%}%>
+                    </table>
+                </form>
+            <%}else{%>
+                <p>You have not created any blogs</p>
+            <%}%>
+            
+</div>
+    <%- include('../partials/footer.ejs')%>

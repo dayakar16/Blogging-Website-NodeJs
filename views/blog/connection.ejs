@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+<div class="body-connection">
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <form>
+    <table class="connection-table">
+        <tbody>
+        <tr>
+        <td><b><%= blog.connectionName%> Blog</b></td>
+        <%if(user == blog.author._id) {%>
+        <td class= "update"> <button type="submit" class="UpdateClassButton" id="updateButton" formmethod="GET" formaction="/connections/<%= blog._id%>/edit">Update</button></td>
+        <td class= "delete"> <button type="submit" class="DeleteClassButton" id="deleteButton" formmethod="POST" formaction="/connections/<%= blog._id%>?_method=DELETE">Delete</button></td>
+        <%}%>
+        </tr>
+        <tr>
+            <td> <img src='<%= blog.image%>' alt="No Image" width="140" height="70"></td>
+            <td> <p>Author by <%= blog.author.firstName + ' ' + blog.author.lastName%>  <br>Publish Date: <%= blog.date %> <br> <%= blog.startTime%> am to <%= blog.endTime %> pm EST <br> Conference Location: <%= blog.location %></p></td>
+            <td></td>
+    </tbody>
+</table>
+<div class="description">
+    <b>Details:</b>
+    <p><%= blog.details %></p>
+</div>
+</form>
+</div>
+<%- include('../partials/footer.ejs') %>

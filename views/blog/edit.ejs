@@ -1,0 +1,52 @@
+<%- include('../partials/header.ejs')%>
+<div class = "content">
+    <form method="POST" action ="/connections/<%= blog._id%>?_method=PUT">
+        <table>
+            <tr>
+                <td><label for="topic">Topic</label></td>
+                <td><input type="text" id="topic" value="<%= blog.categoryTopic%>" name="categoryTopic" size="50" required></td>
+                
+                </tr>
+            <tr>
+                <td><label for="title">Title</label></td>
+                <td><input type="text" id="title" value="<%= blog.connectionName%>"  name="connectionName"  size="50" required></td>
+                
+            </tr>
+            <tr>
+                <td><label for="details">Details</label></td>
+                <td><textarea  id="details" rows="3" name="details" cols="50" minlength="10" required><%= blog.details%></textarea></td>
+                
+            </tr>
+            <tr>
+                <td><label for="where">Conference Location</label></td>
+                <td><input type="text" id="where" value="<%= blog.location%>"  name="location" size="50" required></td>
+                
+            </tr>
+            <tr>
+                <td><label for="when">Date</label></td>
+                <td><input type="date" id="when" value="<%= blog.date %>" name="date" required></td>
+                
+            </tr>
+            <tr>
+                <td><label for="start">Start Time</label></td>
+                <td><input type="time" name="startTime" value="<%= blog.startTime%>" id="start" required></td>
+                
+            </tr>
+            <tr>
+                <td><label for="end">End Time</label></td>
+                <td><input type="time" value="<%= blog.endTime%>" name="endTime" id="end" required></td>
+                
+            </tr>
+            <tr>
+                <td><label for="importurl">Logo Url</label></td>
+                <td><input type="text" id="importurl" value="<%= blog.image%>" name="image" size="50" required></td>
+                
+            </tr>
+            <tr>
+                <td colspan="2" class = "editbutton"><button>Submit</button></td>
+            </tr>
+
+            </table>        
+    </form>
+    </div>
+    <%- include('../partials/footer.ejs')%>

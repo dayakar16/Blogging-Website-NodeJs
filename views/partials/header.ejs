@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<div class="header-dark">
+<header>
+    <div class="header-list">
+        <a href="/"><img src='/images/logo.png' alt="UNCC Logo" width="120" height="60"> </a>
+        <ul class="floatright">
+            <%if(!user) {%>
+                <li><a href='/users/new'>Sign Up</a> </li>
+                <li> <a href='/users/login'>Login</a>
+            <%} else {%>      
+                <li><a href='/users/profile'>Profile</a>
+                <li><a href='/users/logout'>Logout</a></li>
+                <li><a href="/connections/new"> Start a new Blog</a></li>
+            <%}%>
+        </ul>
+    </div>
+    <hr class="solid">
+    <a href="/connections">Blogs</a>
+    <% if(name){ %>
+        <p class="Name"> Welcome <%= name %></p>
+   <% }%>
+
+</header>
+</div>
+
+<% if(errorMessages.length > 0) {%>
+    <% errorMessages.forEach(message=>{%>
+        <div class='error'>
+            <%=message%>
+        </div>
+        <%});%>
+            <%}%>
+                <% if(successMessages.length > 0) {%>
+                    <% successMessages.forEach(message=>{%>
+                        <div class='success'>
+                            <%=message%>
+                        </div>
+                        <%});%>
+                            <%}%>

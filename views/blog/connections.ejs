@@ -1,0 +1,20 @@
+<%- include('../partials/header.ejs') %>
+
+    <div class="body-connections">
+                <% if(categories.length && blogs.length){%>
+                    <ul>
+                        <%for(let i =0; i< categories.length;i++){%>
+                            <li class="categories"><b><%=categories[i]%></b></li>
+                            <%for(let j =0; j< blogs.length; j++){ %>
+                                <%if(blogs[j].categoryTopic == categories[i]){%>
+                                <li><a href="/connections/<%= blogs[j]._id%>"><%=blogs[j].connectionName%></a></li>
+                            <%}%>
+                            <%}%>
+                        <%}%>
+                    </ul>
+                    <%}else{%>
+                        <p>No records to display</p>
+                    <%}%>
+                    
+    </div>
+    <%- include('../partials/footer.ejs') %>
