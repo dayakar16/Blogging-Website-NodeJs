@@ -2,13 +2,39 @@
 <div class="body-connection">
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
     <form>
+        
     <table class="connection-table">
         <tbody>
+            <%if(user != blog.author._id) {%>
+            <tr> 
+                <td></td>
+                <td></td>
+                <td><div class="rsvpheading">
+                    <p><%= count %> people going </p>
+                     <b>RSVP to attend</b> 
+                 </div>
+                </td>
+            </tr>
+            <% } else{ %> 
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <p><%= count %> people going </p>
+                    </td>
+                </tr>
+                <%}%> 
         <tr>
         <td><b><%= blog.connectionName%> Blog</b></td>
         <%if(user == blog.author._id) {%>
         <td class= "update"> <button type="submit" class="UpdateClassButton" id="updateButton" formmethod="GET" formaction="/connections/<%= blog._id%>/edit">Update</button></td>
         <td class= "delete"> <button type="submit" class="DeleteClassButton" id="deleteButton" formmethod="POST" formaction="/connections/<%= blog._id%>?_method=DELETE">Delete</button></td>
+        <%} else{ %>
+               
+                <td></td>
+                <td> <button type="submit" class="rsvp" name ="rsvp" value="yes" formmethod="POST" formaction="/connections/<%= blog._id%>/rsvp">Yes</button></td>
+                <td> <button type="submit" class="rsvp" name ="rsvp" value="no" formmethod="POST" formaction="/connections/<%= blog._id%>/rsvp">No</button></td>
+                <td> <button type="submit" class="rsvp" name ="rsvp" value="maybe" formmethod="POST" formaction="/connections/<%= blog._id%>/rsvp">Maybe</button></td>	
         <%}%>
         </tr>
         <tr>

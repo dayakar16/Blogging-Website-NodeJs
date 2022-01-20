@@ -1,5 +1,6 @@
 const model = require('../models/user');
 const Connection = require('../models/connection');
+const rsvp = require('../models/rsvp');
 
 exports.new = (req, res)=>{
         return res.render('./user/new');
@@ -61,10 +62,49 @@ exports.login = (req, res, next)=>{
 
 exports.profile = (req, res, next)=>{
     let id = req.session.user;
-    Promise.all([model.findById(id), Connection.find({author: id})])
+    
+    Promise.all([Connection.find(),rsvp.find()])
     .then(results=>{
-        const [user, blogs] = results;
-        res.render('./user/profile', {user, blogs});
+        let [allblogs,rsvps] = results;
+        let blogsYes = [];
+        let blogsNo = [];
+        let blogsMaybe = [];
+        rsvps.forEach(rsvp=>{
+            rsvp.yes.forEach(rn=>{
+                if(rn==id)
+                {
+                    allblogs.forEach(blog=>{
+                        if(blog._id==rsvp.blogId)
+                        {blogsYes.push(blog);}
+                    })
+                }
+            })
+            rsvp.no.forEach(rn=>{
+                if(rn==id)
+                {
+                    allblogs.forEach(blog=>{
+                        if(blog._id==rsvp.blogId)
+                        {blogsNo.push(blog);}
+                    })
+                }
+            })
+            rsvp.maybe.forEach(rn=>{
+                if(rn==id)
+                {
+                    allblogs.forEach(blog=>{
+                        if(blog._id==rsvp.blogId)
+                        {blogsMaybe.push(blog);}
+                    })
+                }
+            })
+        })
+        
+        Promise.all([model.findById(id), Connection.find({author: id})])
+        .then(results=>{
+            const [user, blogs] = results;
+            res.render('./user/profile', {user, blogs, blogsYes,blogsNo,blogsMaybe});
+        })
+        .catch(err=>next(err));
     })
     .catch(err=>next(err));
 };

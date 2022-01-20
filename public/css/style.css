@@ -246,3 +246,25 @@ color: grey;
   margin-top: 5px;
   margin-right: 30px;
 }
+
+.button1{
+	float:right;
+	margin-right:30px;
+	border:none;
+}
+
+.rsvpheading { 
+    text-align:center;
+    width: 100%;
+}
+
+.rsvp {
+  color: white;
+    background-color: grey;
+    float: right;
+}
+
+.button_css {
+  color: white;
+  background-color: grey;
+}

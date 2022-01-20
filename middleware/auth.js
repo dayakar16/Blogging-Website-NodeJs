@@ -42,3 +42,20 @@ exports.isAuthor = (req, res, next) =>{
     })
     .catch(err=>next(err));
 };
+
+
+exports.isNotBlogAuthor = (req,res,next)=>{
+    let id = req.params.id;
+    Connection.findById(id)
+    .then(blog=>{
+        if(blog.author != req.session.user){
+            return next();
+        }else{
+            let err = new Error('Unauthorised to access the resource');
+            err.status = 401;
+            return next(err);
+        }
+    })
+    .catch(err=>next(err));
+}
+

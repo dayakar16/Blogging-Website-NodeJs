@@ -23,6 +23,69 @@
             <%}else{%>
                 <p>You have not created any blogs</p>
             <%}%>
-            
+
+
+            <br><br><h3><%= user.firstName%>'s RSVPs  </h3><br>
+    <% if(blogsYes.length || blogsNo.length || blogsMaybe.length) { %>
+        <table>
+            <tr>
+              <th>Category </th>
+              <th>Connection </th>
+              <th>Going? </th>
+              <th>Actions </th>
+            </tr>
+            <%if (blogsYes.length){
+                blogsYes.forEach(blog=>{ %>
+                    <tr>
+                        <th><%= blog.categoryTopic %></th>
+                        <th><%= blog.connectionName %></th>
+                        <th>Yes</th>
+                        <th>
+                            <form>
+                                <input type = "hidden" id="rsvp"/>
+                                <button type="submit" class="button_css"  formmethod="GET" formaction="/connections/<%= blog._id%>"> Edit </button>
+                                <button type="submit" class="button_css" name = "rsvp" value = "yes" formmethod="POST" formaction="/connections/<%= blog._id%>/rsvp?_method=DELETE"> Delete </button>		
+                            </form>
+                        </th>
+                    </tr>
+                <% })
+            }%>
+            <%if (blogsNo.length){
+                blogsNo.forEach(blog=>{ %>
+                    <tr>
+                        <th><%= blog.categoryTopic %></th>
+                        <th><%= blog.connectionName %></th>
+                        <th>No</th>
+                        <th>
+                            <form>
+                                <input type = "hidden" id="rsvp"/>
+                                <button type="submit" class="button_css"  formmethod="GET" formaction="/connections/<%= blog._id%>"> Edit </button>
+                                <button type="submit" class="button_css"  name = "rsvp" value = "no" formmethod="POST" formaction="/connections/<%= blog._id%>/rsvp?_method=DELETE"> Delete </button>		
+                            </form>
+                        </th>
+                    </tr>
+                <% })
+            }%>
+            <%if (blogsMaybe.length){
+                blogsMaybe.forEach(blog=>{ %>
+                    <tr>
+                        <th><%= blog.categoryTopic %></th>
+                        <th><%= blog.connectionName %></th>
+                        <th>Maybe</th>
+                        <th>
+                            <form>
+                                <input type = "hidden" id="rsvp"/>
+                                <button type="submit" class="button_css"  formmethod="GET" formaction="/connections/<%= blog._id%>"> Edit </button>
+                                <button type="submit" class="button_css" name = "rsvp" value = "maybe" formmethod="POST" formaction="/connections/<%= blog._id%>/rsvp?_method=DELETE"> Delete </button>		
+                            </form>
+                        </th>
+                    </tr>
+                <% })
+            }%>
+        </table>
+    <% }else{ %>
+        <p>You have not RSVPed any blogs.</p><br><br><br><br>
+    <% } %>
+
 </div>
     <%- include('../partials/footer.ejs')%>
