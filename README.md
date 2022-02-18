@@ -13,4 +13,5 @@ Requirements:
 1. Node js, npm , mongo db and visual studio should be installed. 
 2. Download the code and open it in visual studio. 
 3. open the terminal and do "npm install" 
-4. open the http://localhost:3000/ and check the website. 
+4. Run the command "node app.js"
+5. open the http://localhost:3000/ and check the website. 
